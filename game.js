@@ -431,6 +431,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // 添加事件监听
         window.addEventListener('resize', resizeCanvas);
         
+        // 为开始屏幕添加点击和触摸事件
+        startScreen.addEventListener('click', startGame);
+        startScreen.addEventListener('touchstart', (e) => {
+            startGame();
+            e.preventDefault();
+        });
+        
         // 键盘控制
         document.addEventListener('keydown', (e) => {
             if ((e.code === 'Space' || e.code === 'ArrowUp') && !e.repeat) {
@@ -483,6 +490,21 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
         });
         
+        // 添加touchend事件，确保触摸结束后重置touchStarted标志
+        canvas.addEventListener('touchend', (e) => {
+            // 延迟重置touchStarted标志，以便click事件可以检测到它
+            setTimeout(() => {
+                touchStarted = false;
+            }, 50);
+            e.preventDefault();
+        });
+        
+        // 添加touchcancel事件，确保触摸取消时也重置touchStarted标志
+        canvas.addEventListener('touchcancel', (e) => {
+            touchStarted = false;
+            e.preventDefault();
+        });
+        
         // 点击屏幕开始游戏
         canvas.addEventListener('click', (e) => {
             // 如果是触摸事件触发的，则不处理点击事件
@@ -504,6 +526,13 @@ document.addEventListener('DOMContentLoaded', () => {
         toggleModeBtn.addEventListener('click', toggleDarkMode);
         toggleSoundBtn.addEventListener('click', toggleSound);
         restartBtn.addEventListener('click', resetGame);
+        
+        // 为游戏结束屏幕添加点击和触摸事件
+        gameOverScreen.addEventListener('click', resetGame);
+        gameOverScreen.addEventListener('touchstart', (e) => {
+            resetGame();
+            e.preventDefault();
+        });
     }
     
     // 创建音效文件夹
