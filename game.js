@@ -457,7 +457,10 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // 触摸控制
         let lastTapTime = 0;
+        let touchStarted = false;
+        
         canvas.addEventListener('touchstart', (e) => {
+            touchStarted = true;
             const currentTime = performance.now();
             const tapLength = currentTime - lastTapTime;
             
@@ -481,7 +484,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         
         // 点击屏幕开始游戏
-        canvas.addEventListener('click', () => {
+        canvas.addEventListener('click', (e) => {
+            // 如果是触摸事件触发的，则不处理点击事件
+            if (touchStarted) {
+                touchStarted = false;
+                return;
+            }
+            
             if (!gameState.running && !gameState.gameOver) {
                 startGame();
             } else if (gameState.gameOver) {
