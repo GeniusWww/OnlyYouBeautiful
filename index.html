@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>唱跳rap挑战</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="game-header">
+            <div class="score-container">
+                <span id="score">0</span>
+                <span id="high-score">HI: 0</span>
+            </div>
+            <div class="controls">
+                <button id="toggle-mode" aria-label="切换日夜模式">
+                    <span class="icon">🌓</span>
+                </button>
+                <button id="toggle-sound" aria-label="切换声音">
+                    <span class="icon">🔊</span>
+                </button>
+                <button id="restart" aria-label="重新开始" class="hidden">
+                    <span class="icon">🔄</span>
+                </button>
+            </div>
+        </div>
+        
+        <div id="game-container">
+            <canvas id="game-canvas"></canvas>
+            <div id="game-over" class="hidden">
+                <h2>游戏结束</h2>
+                <p>点击屏幕或按空格键重新开始</p>
+            </div>
+            <div id="start-screen">
+                <h2>唱跳rap挑战</h2>
+                <p>按空格键或点击屏幕开始游戏</p>
+            </div>
+        </div>
+        
+        <div class="game-instructions">
+            <p>使用 <kbd>空格键</kbd> 或 <kbd>↑</kbd> 跳跃，<kbd>↓</kbd> 下蹲</p>
+            <p>在移动设备上点击屏幕跳跃，双击下蹲</p>
+        </div>
+    </div>
+    
+    <!-- 音效资源 -->
+    <audio id="jump-sound" src="sounds/jump.mp3" preload="auto"></audio>
+    <audio id="collision-sound" src="sounds/collision.mp3" preload="auto"></audio>
+    <audio id="point-sound" src="sounds/point.mp3" preload="auto"></audio>
+    
+    <script src="game.js"></script>
+</body>
+</html>
